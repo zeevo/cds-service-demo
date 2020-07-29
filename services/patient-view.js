@@ -1,3 +1,5 @@
+const { v4 } = require("uuid");
+
 const definition = {
   hook: "patient-view",
   name: "CDS Service Starter Patient View",
@@ -9,20 +11,33 @@ const definition = {
 };
 
 const handler = (req, res) => {
-  const patient = req.body.prefetch.patient;
-
   const text = `Hello world!`;
+
+  console.log(req.body);
 
   let cards = {
     cards: [
       {
-        summary: `Summary: ${text}`,
-        detail: `Detail: ${text}`,
+        uuid: v4(),
+        summary: text,
+        detail: "Details and recommendations here...",
         source: {
           label: "CDS Service Starter",
           url: "https://example.com",
         },
         indicator: "info",
+        links: [
+          {
+            label: "My smart app",
+            url: "https://example.org/launch.html",
+            type: "smart",
+          },
+          {
+            label: "Source code",
+            url: "https://github.com/example/exampleapp",
+            type: "absolute",
+          },
+        ],
       },
     ],
   };
